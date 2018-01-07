@@ -19,19 +19,23 @@ type ListTeamMembersOpts struct {
 
 type v2Teams interface {
 	// Returns all the teams that the authenticated user is associated with
+	//
+	// options:
 	// opts.RoleFilters the teams based on the authenticated user's role on each team.
 	//  - member: returns a list of all the teams which the caller is a member of at least one team group or repository owned by the team
 	//  - contributor: returns a list of teams which the caller has write access to at least one repository owned by the team
 	//  - admin: returns a list teams which the caller has team administrator access
-	// opts.Pagelen the amount of entries to return per page, default to 10
+	// opts.Pagelen amount of entries to return per page, default to 10
+	//
 	// required scopes: [team:read]
 	//
 	// see: https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams
-	List(opts ListTeamsListOpts) (*ListResult, error)
+	List(opts ListTeamsOpts) (*ListResult, error)
 
 	// Gets the public information associated with a team
 	// If the team's profile is private, location, website and created_on elements are omitted.
 	//
+	// params:
 	// username -The team's username or UUID.
 	//
 	// see: https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D
@@ -40,6 +44,13 @@ type v2Teams interface {
 	// List all members of a team
 	// Returns all members of the specified team. Any member of any of the team's groups is considered a member of the team.
 	// This includes users in groups that may not actually have access to any of the team's repositories.
+	//
+	// params:
+	// teamUserName - the team user name to get the members for
+	//
+	// options:
+	// opts.Pagelen amount of entries to return per page, default to 10
+	//
 	// required scopes: [account:read]
 	//
 	// Note that members using the "private profile" feature are not included.
