@@ -1,9 +1,5 @@
 package bb
 
-import (
-	"fmt"
-)
-
 type role string
 
 const (
@@ -15,7 +11,7 @@ type v2TeamsImpl struct {
 }
 
 func (t *v2TeamsImpl) Get(teamName string) (map[string]interface{}, error) {
-	req, err := t.v2Impl.client.New().Path(fmt.Sprintf("teams/%s", teamName)).Request()
+	req, err := t.v2Impl.client.New().Path("teams/").Path(teamName).Request()
 	if err != nil {
 		return nil, err
 	}

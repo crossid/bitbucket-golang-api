@@ -22,6 +22,11 @@ Please see _v2 API_ section for API coverage, PR are very welcome.
 - [x] List Public Repos (with support for pagination, filtering and sorting)
 - [x] List Repos by Owner (with support for pagination, filtering and sorting)
 
+# Users
+
+- [x] Get current user
+- [x] Get public user
+
 # Running tests
 
 In order to run tests you should simply:

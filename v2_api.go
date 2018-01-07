@@ -1,12 +1,9 @@
 package bb
 
-const v2BaseUrl = "https://bitbucket.org/api/2.0/"
-
 // BitBucket API v2
 //
 // see: https://developer.atlassian.com/bitbucket/api/2/reference/
-type v2UsersApi interface {
-}
+const v2BaseUrl = "https://bitbucket.org/api/2.0/"
 
 // List teams options
 type ListTeamsOpts struct {
@@ -94,6 +91,15 @@ type v2Repositories interface {
 	// E.g. with ?role=contributor, only those repositories that the authenticated user has write access to are returned
 	// (this includes any repo the user is an admin on, as that implies write access).
 	ListByOwner(teamOrUser string, opts ListReposByOwnerOpts) (*ListResult, error)
+}
+
+type v2Users interface {
+	// Returns the currently logged in user.
+	// scopes: [account:read]
+	GetCurrent() (map[string]interface{}, error)
+	// Gets the public information associated with a user account.
+	// If the user's profile is private, location, website and created_on elements are omitted.
+	Get(userName string) (map[string]interface{}, error)
 }
 
 type ListResult struct {
