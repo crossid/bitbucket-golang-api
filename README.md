@@ -27,6 +27,14 @@ Please see _v2 API_ section for API coverage, PR are very welcome.
 - [x] Get current user
 - [x] Get public user
 
+
+# v1 API
+
+## Groups
+
+- [x] Get a list groups matching one or more filters.
+- [x] Get a list of an account's (team / user) groups
+
 # Running tests
 
 In order to run tests you should simply:

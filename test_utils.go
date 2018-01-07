@@ -2,10 +2,22 @@ package bb
 
 import "os"
 
-func newTestV2Impl() *v2Impl {
+func getUser() string {
 	user := os.Getenv("BITBUCKET_USER")
+	return user
+}
+
+func getPassword() string {
 	pass := os.Getenv("BITBUCKET_PASSWORD")
-	return newV2BasicAuth(user, pass)
+	return pass
+}
+
+func newTestV2Impl() *v2Impl {
+	return newV2BasicAuth(getUser(), getPassword())
+}
+
+func newTestV1Impl() *v1Impl {
+	return newV1BasicAuth(getUser(), getPassword())
 }
 
 func getTeamName(v2Impl *v2Impl) (string, error) {
