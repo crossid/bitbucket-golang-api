@@ -8,24 +8,37 @@ const v2BaseUrl = "https://bitbucket.org/api/2.0/"
 type v2UsersApi interface {
 }
 
+// List teams options
 type ListTeamsOpts struct {
-	Role    role `url:"role,omitempty"`
-	Pagelen int  `url:"pagelen,omitempty"`
+	// Role filters the teams based on the authenticated user's role on each team.
+	//  - member: returns a list of all the teams which the caller is a member of at least one team group or repository owned by the team
+	//  - contributor: returns a list of teams which the caller has write access to at least one repository owned by the team
+	//  - admin: returns a list teams which the caller has team administrator access
+	Role role `url:"role,omitempty"`
+	// The amount of entries to return per page, default to 10.
+	Pagelen int `url:"pagelen,omitempty"`
 }
 
+// List team members options
 type ListTeamMembersOpts struct {
+	// The amount of entries to return per page, default to 10.
 	Pagelen int `url:"pagelen,omitempty"`
+}
+
+// List repositories options
+type ListReposOpts struct {
+	// Filter the results to include only repositories create on or after this ISO-8601 timestamp. Example: YYYY-MM-DDTHH:mm:ss.sssZ
+	After string `url:"after,omitempty"`
+	// The amount of entries to return per page, default to 10.
+	Pagelen int `url:"pagelen,omitempty"`
+	// query according to:https://developer.atlassian.com/bitbucket/api/2/reference/meta/filtering
+	Query string `url:"q,omitempty"`
+	// sorting according to:https://developer.atlassian.com/bitbucket/api/2/reference/meta/filtering
+	Sort string `url:"sort,omitempty"`
 }
 
 type v2Teams interface {
 	// Returns all the teams that the authenticated user is associated with
-	//
-	// options:
-	// opts.RoleFilters the teams based on the authenticated user's role on each team.
-	//  - member: returns a list of all the teams which the caller is a member of at least one team group or repository owned by the team
-	//  - contributor: returns a list of teams which the caller has write access to at least one repository owned by the team
-	//  - admin: returns a list teams which the caller has team administrator access
-	// opts.Pagelen amount of entries to return per page, default to 10
 	//
 	// required scopes: [team:read]
 	//
@@ -47,9 +60,6 @@ type v2Teams interface {
 	//
 	// params:
 	// teamUserName - the team user name to get the members for
-	//
-	// options:
-	// opts.Pagelen amount of entries to return per page, default to 10
 	//
 	// required scopes: [account:read]
 	//
