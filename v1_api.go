@@ -59,7 +59,12 @@ type v1Privilege interface {
 	ListOfAccountAndRepo(teamOrUsername, repoSlug string) ([]map[string]interface{}, error)
 }
 
-// Use the group-privileges resource to query and manipulate the group privileges (permissions) of a Bitbucket Cloudaccount's repositories.
+// Use the group-privileges resource to query and manipulate the group privileges (permissions) of a Bitbucket Cloud account's repositories.
 // An account owner (or team account administrator) defines groups at the account level.
 type v1GroupPrivilege interface {
+	// GET a list of group privileges granted on all repos
+	ListForAccount(teamOrUsername string, opts ListPrivilegesOfAccountOpts) ([]map[string]interface{}, error)
+
+	// GET a list of group privileges granted of a specific repository
+	ListOfAccountAndRepo(teamOrUsername, repoSlug string) ([]map[string]interface{}, error)
 }

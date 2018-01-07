@@ -7,10 +7,11 @@ import (
 )
 
 type v1Impl struct {
-	client     *sling.Sling
-	basicAuth  basicAuth
-	groups     v1Groups
-	privileges v1Privilege
+	client          *sling.Sling
+	basicAuth       basicAuth
+	groups          v1Groups
+	privileges      v1Privilege
+	groupPrivileges v1GroupPrivilege
 }
 
 func newV1Of(client *http.Client) *v1Impl {
@@ -26,6 +27,7 @@ func newV1Of(client *http.Client) *v1Impl {
 
 	impl.groups = &v1GroupsImpl{impl}
 	impl.privileges = &v1PrivilegesImpl{impl}
+	impl.groupPrivileges = &v1GroupPrivilegesImpl{impl}
 
 	return impl
 }

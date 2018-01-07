@@ -38,7 +38,12 @@ Please see _v2 API_ section for API coverage, PR are very welcome.
 ## Privileges
 
 - [x] List privileges of an account (team / user)
-- [x] List of privileges of an account (team / user) for a specific repo
+- [x] List privileges of an account (team / user) for a specific repo
+
+## Group Privileges
+
+- [x] List group privileges of an account (team / user)
+- [x] List group privileges of an account (team / user) for a specific repo
 
 # Running tests
 
