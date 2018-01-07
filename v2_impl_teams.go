@@ -22,7 +22,7 @@ func (t *v2TeamsImpl) Get(teamName string) (map[string]interface{}, error) {
 	return t.v2Impl.Do(req)
 }
 
-func (t *v2TeamsImpl) List(opts ListTeamsListOpts) (*ListResult, error) {
+func (t *v2TeamsImpl) List(opts ListTeamsOpts) (*ListResult, error) {
 	req, err := t.v2Impl.client.New().Path("teams").QueryStruct(opts).Request()
 	if err != nil {
 		return nil, err

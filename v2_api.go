@@ -8,7 +8,7 @@ const v2BaseUrl = "https://bitbucket.org/api/2.0/"
 type v2UsersApi interface {
 }
 
-type ListTeamsListOpts struct {
+type ListTeamsOpts struct {
 	Role    role `url:"role,omitempty"`
 	Pagelen int  `url:"pagelen,omitempty"`
 }
