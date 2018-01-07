@@ -1,11 +1,5 @@
 package bb
 
-type role string
-
-const (
-	adminRole role = "admin"
-)
-
 type v2TeamsImpl struct {
 	v2Impl *v2Impl
 }

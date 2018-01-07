@@ -10,6 +10,14 @@ type basicAuth struct {
 	user, password string
 }
 
+type role string
+
+const (
+	AdminRole       role = "admin"
+	ContributorRole role = "contributor"
+	MemberRole      role = "member"
+)
+
 type v2Impl struct {
 	client       *sling.Sling
 	teams        v2Teams

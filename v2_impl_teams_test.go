@@ -9,7 +9,7 @@ func TestV2Teams_List_Get_Members(t *testing.T) {
 	// list
 	pagelen := 1
 	c := newTestV2Impl()
-	lr, err := c.teams.List(ListTeamsOpts{adminRole, pagelen})
+	lr, err := c.teams.List(ListTeamsOpts{AdminRole, pagelen})
 	assert.Nil(t, err)
 	assert.True(t, lr.Size > 1, "expected more than 1 team")
 	assert.Equal(t, pagelen, lr.Page, "should return pageLen size")

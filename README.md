@@ -32,8 +32,13 @@ Please see _v2 API_ section for API coverage, PR are very welcome.
 
 ## Groups
 
-- [x] Get a list groups matching one or more filters.
-- [x] Get a list of an account's (team / user) groups
+- [x] List groups matching one or more filters.
+- [x] List of an account's (team / user) groups
+
+## Privileges
+
+- [x] List privileges of an account (team / user)
+- [x] List of privileges of an account (team / user) for a specific repo
 
 # Running tests
 
