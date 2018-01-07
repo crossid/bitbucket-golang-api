@@ -14,8 +14,13 @@ Please see _v2 API_ section for API coverage, PR are very welcome.
 # Teams
 
 - [x] Get a team
-- [x] List Teams (with pagination support)
+- [x] List Teams (with support for pagination)
 - [x] List Team's members
+
+# Repositories
+
+- [x] List Public Repos (with support for pagination, filtering and sorting)
+- [x] List Repos by Owner (with support for pagination, filtering and sorting)
 
 # Running tests
 

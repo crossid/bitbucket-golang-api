@@ -11,9 +11,10 @@ type basicAuth struct {
 }
 
 type v2Impl struct {
-	client    *sling.Sling
-	teams     v2Teams
-	basicAuth basicAuth
+	client       *sling.Sling
+	teams        v2Teams
+	repositories v2Repositories
+	basicAuth    basicAuth
 }
 
 func newV2Of(client *http.Client) *v2Impl {
@@ -28,6 +29,7 @@ func newV2Of(client *http.Client) *v2Impl {
 	}
 
 	impl.teams = &v2TeamsImpl{impl}
+	impl.repositories = &v2RepositoriesImpl{impl}
 
 	return impl
 }

@@ -37,6 +37,21 @@ type ListReposOpts struct {
 	Sort string `url:"sort,omitempty"`
 }
 
+type ListReposByOwnerOpts struct {
+	// Filters the result based on the authenticated user's role on each repository.
+	// - member: returns repositories to which the user has explicit read access
+	// - contributor: returns repositories to which the user has explicit write access
+	// - admin: returns repositories to which the user has explicit administrator access
+	// - owner: returns all repositories owned by the current user
+	Role role `url:"role,omitempty"`
+	// The amount of entries to return per page, default to 10.
+	Pagelen int `url:"pagelen,omitempty"`
+	// query according to:https://developer.atlassian.com/bitbucket/api/2/reference/meta/filtering
+	Query string `url:"q,omitempty"`
+	// sorting according to:https://developer.atlassian.com/bitbucket/api/2/reference/meta/filtering
+	Sort string `url:"sort,omitempty"`
+}
+
 type v2Teams interface {
 	// Returns all the teams that the authenticated user is associated with
 	//
@@ -66,6 +81,19 @@ type v2Teams interface {
 	// Note that members using the "private profile" feature are not included.
 	// see: https://developer.atlassian.com/bitbucket/api/2/reference/resource/teams/%7Busername%7D/members
 	Members(teamUserName string, opts ListTeamMembersOpts) (*ListResult, error)
+}
+
+type v2Repositories interface {
+	// Returns a paginated list of all public repositories
+	//
+	// required scopes: [repository:read]
+	ListPublic(opts ListReposOpts) (*ListResult, error)
+
+	// Returns a paginated list of all repositories owned by the specified account or UUID.
+	// The result can be narrowed down based on the authenticated user's role.
+	// E.g. with ?role=contributor, only those repositories that the authenticated user has write access to are returned
+	// (this includes any repo the user is an admin on, as that implies write access).
+	ListByOwner(teamOrUser string, opts ListReposByOwnerOpts) (*ListResult, error)
 }
 
 type ListResult struct {
