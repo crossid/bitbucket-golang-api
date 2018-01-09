@@ -59,3 +59,7 @@ Note: Unit tests assume that your user have at least:
 - 2 teams
 - 1 member per team
 - 2 repositories
+
+# License
+
+APACHE 2
