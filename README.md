@@ -4,10 +4,26 @@ Golang implementation for the BitBucket API.
 
 Please see [v1 API](#v1-api) and [v2 API](#v2-api) sections for API coverage, PR are very welcome.
 
-# Other projects
+# Add dependency
 
-- https://github.com/emicklei/go-bitbucket - not updated for long time, contains very minimal APIs
-- https://github.com/ktrysmt/go-bitbucket - active but we found it not clean enough, insufficient unit tests, no support for v1, no OAUTH support, minimal pagination support.
+Use [Dep](https://github.com/golang/dep) to add this library to your project:
+
+`dep ensure -add github.com/crossid/bitbucket-golang-api`
+
+# Insantiate a v1 or v2 api
+
+```go
+v2 := bitbucket.NewV2BasicAuth(user, password)
+v1 := bitbucket.NewV1BasicAuth(user, password)
+```
+
+Work with the API:
+
+```go
+v2.Teams.List(bitbucket.ListTeamsOpts{Role: bitbucket.AdminRole})
+```
+
+Please check unit tests as they cover all supported features.
 
 # v2 API
 
@@ -60,6 +76,11 @@ Note: Unit tests assume that your user have at least:
 - 1 member per team
 - 2 repositories
 
+# Other projects
+
+- https://github.com/emicklei/go-bitbucket - not updated for long time, contains very minimal APIs
+- https://github.com/ktrysmt/go-bitbucket - active but we found it not clean enough, insufficient unit tests, no support for v1, no OAUTH support, minimal pagination support.
+s
 # License
 
 APACHE 2
