@@ -1,4 +1,4 @@
-package bb
+package bitbucket
 
 import (
 	"github.com/stretchr/testify/assert"

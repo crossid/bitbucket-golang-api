@@ -1,4 +1,4 @@
-package bb
+package bitbucket
 
 type v2UsersImpl struct {
 	v2Impl *V2Impl

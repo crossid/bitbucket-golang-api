@@ -1,4 +1,4 @@
-package bb
+package bitbucket
 
 type v1PrivilegesImpl struct {
 	impl *V1Impl

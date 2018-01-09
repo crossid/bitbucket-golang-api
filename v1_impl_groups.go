@@ -1,4 +1,4 @@
-package bb
+package bitbucket
 
 type v1GroupsImpl struct {
 	impl *V1Impl
