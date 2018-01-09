@@ -2,12 +2,12 @@
 
 Golang implementation for the BitBucket API.
 
-Please see _v2 API_ section for API coverage, PR are very welcome.
+Please see [v1 API](#v1-api) and [v2 API](#v2-api) sections for API coverage, PR are very welcome.
 
 # Other projects
 
 - https://github.com/emicklei/go-bitbucket - not updated for long time, contains very minimal APIs
-- https://github.com/ktrysmt/go-bitbucket - active but we found it not clean enough, insufficient unit tests, no OAUTH support, minimal pagination support.
+- https://github.com/ktrysmt/go-bitbucket - active but we found it not clean enough, insufficient unit tests, no support for v1, no OAUTH support, minimal pagination support.
 
 # v2 API
 
@@ -51,7 +51,8 @@ In order to run tests you should simply:
 
 1. Clone the project
 1. Set two env vars: `BITBUCKET_USER` & `BITBUCKET_PASSWORD` with your Bitbucket username and password respectively
-1. go test
+1. dep ensure
+1. `export BITBUCKET_USER=<user> ; export BITBUCKET_PASSWORD="<password>"; go test`
 
 Note: Unit tests assume that your user have at least:
 
