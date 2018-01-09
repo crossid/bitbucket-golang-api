@@ -1,7 +1,7 @@
 package bb
 
 type v2TeamsImpl struct {
-	v2Impl *v2Impl
+	v2Impl *V2Impl
 }
 
 func (t *v2TeamsImpl) Get(teamName string) (map[string]interface{}, error) {

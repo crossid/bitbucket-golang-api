@@ -6,39 +6,39 @@ import (
 	"net/http"
 )
 
-type v1Impl struct {
+type V1Impl struct {
 	client          *sling.Sling
 	basicAuth       basicAuth
-	groups          v1Groups
-	privileges      v1Privilege
-	groupPrivileges v1GroupPrivilege
+	Groups          v1Groups
+	Privileges      v1Privilege
+	GroupPrivileges v1GroupPrivilege
 }
 
-func newV1Of(client *http.Client) *v1Impl {
+func NewV1Of(client *http.Client) *V1Impl {
 	if client == nil {
 		client = http.DefaultClient
 	}
 
 	base := sling.New().Base(v1BaseUrl).Client(client)
 
-	impl := &v1Impl{
+	impl := &V1Impl{
 		client: base,
 	}
 
-	impl.groups = &v1GroupsImpl{impl}
-	impl.privileges = &v1PrivilegesImpl{impl}
-	impl.groupPrivileges = &v1GroupPrivilegesImpl{impl}
+	impl.Groups = &v1GroupsImpl{impl}
+	impl.Privileges = &v1PrivilegesImpl{impl}
+	impl.GroupPrivileges = &v1GroupPrivilegesImpl{impl}
 
 	return impl
 }
 
 // anonymous v1 api
-func newV1() *v1Impl {
-	return newV1Of(nil)
+func NewV1() *V1Impl {
+	return NewV1Of(nil)
 }
 
-func newV1BasicAuth(user, pass string) *v1Impl {
-	client := newV1()
+func NewV1BasicAuth(user, pass string) *V1Impl {
+	client := NewV1()
 	client.basicAuth = basicAuth{
 		user, pass,
 	}
@@ -46,7 +46,7 @@ func newV1BasicAuth(user, pass string) *v1Impl {
 	return client
 }
 
-func (impl *v1Impl) DoCustom(req *http.Request, successV interface{}) (*http.Response, error) {
+func (impl *V1Impl) DoCustom(req *http.Request, successV interface{}) (*http.Response, error) {
 	req.Header.Set("Content-Type", "application/json")
 
 	if impl.basicAuth.user != "" {
@@ -64,7 +64,7 @@ func (impl *v1Impl) DoCustom(req *http.Request, successV interface{}) (*http.Res
 	return resp, err
 }
 
-func (impl *v1Impl) Do(req *http.Request) (map[string]interface{}, error) {
+func (impl *V1Impl) Do(req *http.Request) (map[string]interface{}, error) {
 	successV := map[string]interface{}{}
 
 	_, err := impl.DoCustom(req, &successV)
@@ -76,7 +76,7 @@ func (impl *v1Impl) Do(req *http.Request) (map[string]interface{}, error) {
 	return successV, nil
 }
 
-func (impl *v1Impl) DoList(req *http.Request) ([]map[string]interface{}, error) {
+func (impl *V1Impl) DoList(req *http.Request) ([]map[string]interface{}, error) {
 	successV := []map[string]interface{}{}
 
 	_, err := impl.DoCustom(req, &successV)

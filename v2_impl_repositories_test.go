@@ -9,7 +9,7 @@ func TestV2RepositoriesImpl_ListPublic(t *testing.T) {
 	// list
 	pagelen := 2
 	c := newTestV2Impl()
-	lr, err := c.repositories.ListPublic(ListReposOpts{Pagelen: pagelen})
+	lr, err := c.Repositories.ListPublic(ListReposOpts{Pagelen: pagelen})
 	assert.Nil(t, err)
 	assert.Equal(t, pagelen, len(lr.Values))
 	assert.Nil(t, err)
@@ -24,7 +24,7 @@ func TestV2RepositoriesImpl_ListByOwner(t *testing.T) {
 	teamUsername, err := getTeamName(c)
 	assert.Nil(t, err)
 
-	repos, err := c.repositories.ListByOwner(teamUsername, ListReposByOwnerOpts{Pagelen: pagelen})
+	repos, err := c.Repositories.ListByOwner(teamUsername, ListReposByOwnerOpts{Pagelen: pagelen})
 	assert.Nil(t, err)
 	assert.Equal(t, pagelen, len(repos.Values))
 }

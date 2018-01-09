@@ -10,7 +10,7 @@ func TestV1PrivilegesImpl_ListOfAccount(t *testing.T) {
 	c := newTestV1Impl()
 	teamUsername, err := getTeamName(newTestV2Impl())
 	assert.Nil(t, err)
-	privileges, err := c.privileges.ListForAccount(teamUsername, ListPrivilegesOfAccountOpts{Private: true, Filter: AdminLevel})
+	privileges, err := c.Privileges.ListForAccount(teamUsername, ListPrivilegesOfAccountOpts{Private: true, Filter: AdminLevel})
 	assert.Nil(t, err)
 	assert.True(t, len(privileges) > 0)
 }
@@ -22,7 +22,7 @@ func TestV1PrivilegesImpl_ListOfAccountAndRepo(t *testing.T) {
 	assert.Nil(t, err)
 
 	v1 := newTestV1Impl()
-	privileges, err := v1.privileges.ListOfAccountAndRepo(team, repo)
+	privileges, err := v1.Privileges.ListOfAccountAndRepo(team, repo)
 	assert.Nil(t, err)
 	assert.True(t, len(privileges) > 0)
 	for _, priv := range privileges {

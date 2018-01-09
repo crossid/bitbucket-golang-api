@@ -1,7 +1,7 @@
 package bb
 
 type v2UsersImpl struct {
-	v2Impl *v2Impl
+	v2Impl *V2Impl
 }
 
 func (t *v2UsersImpl) GetCurrent() (map[string]interface{}, error) {

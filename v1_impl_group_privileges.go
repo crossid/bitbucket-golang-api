@@ -1,7 +1,7 @@
 package bb
 
 type v1GroupPrivilegesImpl struct {
-	impl *v1Impl
+	impl *V1Impl
 }
 
 func (v1 *v1GroupPrivilegesImpl) ListForAccount(teamOrUsername string, opts ListPrivilegesOfAccountOpts) ([]map[string]interface{}, error) {

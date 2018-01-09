@@ -1,7 +1,7 @@
 package bb
 
 type v2RepositoriesImpl struct {
-	v2Impl *v2Impl
+	v2Impl *V2Impl
 }
 
 func (t *v2RepositoriesImpl) ListPublic(opts ListReposOpts) (*ListResult, error) {

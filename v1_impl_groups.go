@@ -1,7 +1,7 @@
 package bb
 
 type v1GroupsImpl struct {
-	impl *v1Impl
+	impl *V1Impl
 }
 
 func (v1 *v1GroupsImpl) List(opts ListGroupsOpts) ([]map[string]interface{}, error) {

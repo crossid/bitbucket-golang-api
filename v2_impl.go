@@ -18,39 +18,39 @@ const (
 	MemberRole      role = "member"
 )
 
-type v2Impl struct {
+type V2Impl struct {
 	client       *sling.Sling
-	teams        v2Teams
-	repositories v2Repositories
-	users        v2Users
+	Teams        v2Teams
+	Repositories v2Repositories
+	Users        v2Users
 	basicAuth    basicAuth
 }
 
-func newV2Of(client *http.Client) *v2Impl {
+func NewV2Of(client *http.Client) *V2Impl {
 	if client == nil {
 		client = http.DefaultClient
 	}
 
 	base := sling.New().Base(v2BaseUrl).Client(client)
 
-	impl := &v2Impl{
+	impl := &V2Impl{
 		client: base,
 	}
 
-	impl.teams = &v2TeamsImpl{impl}
-	impl.repositories = &v2RepositoriesImpl{impl}
-	impl.users = &v2UsersImpl{impl}
+	impl.Teams = &v2TeamsImpl{impl}
+	impl.Repositories = &v2RepositoriesImpl{impl}
+	impl.Users = &v2UsersImpl{impl}
 
 	return impl
 }
 
 // anonymous v2 api
-func newV2() *v2Impl {
-	return newV2Of(nil)
+func NewV2() *V2Impl {
+	return NewV2Of(nil)
 }
 
-func newV2BasicAuth(user, pass string) *v2Impl {
-	client := newV2()
+func NewV2BasicAuth(user, pass string) *V2Impl {
+	client := NewV2()
 	client.basicAuth = basicAuth{
 		user, pass,
 	}
@@ -58,7 +58,7 @@ func newV2BasicAuth(user, pass string) *v2Impl {
 	return client
 }
 
-func (impl *v2Impl) DoList(req *http.Request) (*ListResult, error) {
+func (impl *V2Impl) DoList(req *http.Request) (*ListResult, error) {
 	successV := &ListResult{}
 	failureV := &BitbucketError{}
 	resp, err := impl.DoCustom(req, successV, failureV)
@@ -78,7 +78,7 @@ func (impl *v2Impl) DoList(req *http.Request) (*ListResult, error) {
 	return successV, nil
 }
 
-func (impl *v2Impl) Next(next string) (*ListResult, error) {
+func (impl *V2Impl) Next(next string) (*ListResult, error) {
 	req, err := impl.client.Path(next).Request()
 	if err != nil {
 
@@ -86,7 +86,7 @@ func (impl *v2Impl) Next(next string) (*ListResult, error) {
 	return impl.DoList(req)
 }
 
-func (impl *v2Impl) DoCustom(req *http.Request, successV, failureV interface{}) (*http.Response, error) {
+func (impl *V2Impl) DoCustom(req *http.Request, successV, failureV interface{}) (*http.Response, error) {
 	req.Header.Set("Content-Type", "application/json")
 
 	if impl.basicAuth.user != "" {
@@ -97,7 +97,7 @@ func (impl *v2Impl) DoCustom(req *http.Request, successV, failureV interface{}) 
 	return resp, err
 }
 
-func (impl *v2Impl) Do(req *http.Request) (map[string]interface{}, error) {
+func (impl *V2Impl) Do(req *http.Request) (map[string]interface{}, error) {
 	successV := map[string]interface{}{}
 	failureV := &BitbucketError{}
 

@@ -12,16 +12,16 @@ func getPassword() string {
 	return pass
 }
 
-func newTestV2Impl() *v2Impl {
-	return newV2BasicAuth(getUser(), getPassword())
+func newTestV2Impl() *V2Impl {
+	return NewV2BasicAuth(getUser(), getPassword())
 }
 
-func newTestV1Impl() *v1Impl {
-	return newV1BasicAuth(getUser(), getPassword())
+func newTestV1Impl() *V1Impl {
+	return NewV1BasicAuth(getUser(), getPassword())
 }
 
-func getTeamName(v2Impl *v2Impl) (string, error) {
-	teams, err := v2Impl.teams.List(ListTeamsOpts{Role: AdminRole, Pagelen: 1})
+func getTeamName(v2Impl *V2Impl) (string, error) {
+	teams, err := v2Impl.Teams.List(ListTeamsOpts{Role: AdminRole, Pagelen: 1})
 	if err != nil {
 		return "", err
 	}
@@ -29,13 +29,13 @@ func getTeamName(v2Impl *v2Impl) (string, error) {
 	return teams.Values[0]["username"].(string), nil
 }
 
-func getRepoAndTeam(v2Impl *v2Impl) (team string, repo string, err error) {
+func getRepoAndTeam(v2Impl *V2Impl) (team string, repo string, err error) {
 	team, err = getTeamName(v2Impl)
 	if err != nil {
 		return
 	}
 
-	repos, err := v2Impl.repositories.ListByOwner(team, ListReposByOwnerOpts{})
+	repos, err := v2Impl.Repositories.ListByOwner(team, ListReposByOwnerOpts{})
 	if err != nil {
 		return "", "", err
 	}
